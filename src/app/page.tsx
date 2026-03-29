@@ -102,36 +102,49 @@ export default function HomePage() {
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="text-center py-12 sm:py-16">
-        <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
-          How Much Does Your Country
-          <br className="hidden sm:block" /> Spend on Defense?
-        </h1>
-        <p className="mt-4 mx-auto max-w-2xl text-lg text-text-secondary">
-          Explore and compare military budgets across 40+ nations. See where
-          taxpayer money goes, who spends the most, and how your country stacks
-          up.
-        </p>
-        <Link
-          href="/compare"
-          className="mt-8 inline-flex items-center gap-2 rounded-xl bg-accent-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-accent-navy/90 hover:shadow-lg"
-        >
-          Start Comparing
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+      <section className="relative text-center py-12 sm:py-16 overflow-hidden rounded-2xl">
+        {/* Subtle grid pattern background */}
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        {/* Gradient mesh overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(ellipse_at_top_left,rgba(30,58,138,0.15)_0%,transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(30,58,138,0.10)_0%,transparent_50%)]" />
+        <div className="relative z-10">
+          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+            How Much Does Your Country
+            <br className="hidden sm:block" /> Spend on Defense?
+          </h1>
+          <p className="mt-4 mx-auto max-w-2xl text-lg text-text-secondary">
+            Explore and compare military budgets across 40+ nations. See where
+            taxpayer money goes, who spends the most, and how your country stacks
+            up.
+          </p>
+          <Link
+            href="/compare"
+            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-accent-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-accent-navy/90 hover:shadow-lg"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13 7l5 5m0 0l-5 5m5-5H6"
-            />
-          </svg>
-        </Link>
+            Start Comparing
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </Link>
+        </div>
       </section>
 
       {/* Quick Stats Strip */}
@@ -189,6 +202,25 @@ export default function HomePage() {
         </div>
         <div className="rounded-xl bg-white p-6 shadow-md">
           <Top10Chart data={chartData} />
+        </div>
+
+        {/* Top 10 country chips */}
+        <div className="mt-4">
+          <p className="text-sm font-medium text-text-secondary mb-3">
+            View all countries
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            {top10.map((c) => (
+              <Link
+                key={c.code}
+                href={`/country/${c.code.toLowerCase()}`}
+                className="flex items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-sm font-medium text-text-primary shadow-sm transition-all duration-200 hover:border-accent-navy hover:bg-accent-navy-light/50 hover:shadow-md"
+              >
+                <span>{c.flag}</span>
+                <span className="truncate">{c.name}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { getAllCountries, type Country } from "@/lib/data";
 
 type SortKey =
@@ -181,7 +182,16 @@ export default function RankingsPage() {
                           : "text-text-secondary"
                       }`}
                     >
-                      {col.format(country)}
+                      {col.key === "name" ? (
+                        <Link
+                          href={`/country/${country.code.toLowerCase()}`}
+                          className="hover:text-accent-navy hover:underline transition-colors duration-200"
+                        >
+                          {col.format(country)}
+                        </Link>
+                      ) : (
+                        col.format(country)
+                      )}
                     </td>
                   ))}
                 </tr>

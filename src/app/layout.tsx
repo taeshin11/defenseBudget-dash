@@ -5,6 +5,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
+import FeedbackWidget from "@/components/FeedbackWidget";
+import BackToTop from "@/components/BackToTop";
 
 // Replace G-XXXXXXXXXX with your actual Google Analytics 4 measurement ID
 const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
@@ -117,6 +119,8 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <BackToTop />
+        <FeedbackWidget />
         <AdSlot position="sticky-footer" />
       </body>
     </html>
