@@ -81,6 +81,14 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
 
+      {/* Google AdSense */}
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7098271335538021"
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
+
       {/* Google Analytics 4 */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
