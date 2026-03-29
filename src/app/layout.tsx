@@ -60,6 +60,9 @@ export const metadata: Metadata = {
       "Compare defense spending, GDP ratios, and military personnel across 40+ nations.",
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "WddgcbVJsL2BGHNAje5m6DK56IcR0Mw5UOqozI2Xtrc",
+  },
 };
 
 export default function RootLayout({
