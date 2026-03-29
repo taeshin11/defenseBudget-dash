@@ -1,7 +1,7 @@
 # DefenseBudget Dash — Progress Log
-# Last Updated: 2026-03-29
-# Current Milestone: 12 (Complete)
-# Status: DEPLOYED
+# Last Updated: 2026-03-30
+# Current Milestone: 12 (Final QA & Polish)
+# Status: DEPLOYED — QA COMPLETE
 
 ## Completed
 - Milestone 1: Project Scaffolding & Repo Setup
@@ -15,9 +15,21 @@
 - Milestone 9: Visitor Counter
 - Milestone 10: SEO & Performance Optimization
 - Milestone 11: Vercel Deployment
+- Milestone 12: Final QA & Polish
+
+## M12 QA Changes (2026-03-30)
+- Added missing SEO metadata to about, how-to-use, privacy, terms pages
+- Updated compare/rankings page titles to match PRD spec
+- Replaced SVG OG image with dynamic PNG via Next.js ImageResponse
+- Added FAQ JSON-LD schema to how-to-use page
+- Fixed GA tracking: now uses env var, only loads when configured
+- Fixed copyright year (2025 → 2026)
+- Added "Advertisement" labels to ad slots (PRD requirement)
+- Removed unused googleapis dependency
+- Added NEXT_PUBLIC_GA_MEASUREMENT_ID to .env.local
 
 ## Current
-Milestone 12: Final QA & Polish
+All milestones complete.
 
 ## Blockers
 (none)

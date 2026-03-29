@@ -53,7 +53,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-xs text-text-muted">
-            &copy; 2025 DefenseBudget Dash. Open data for public interest.
+            &copy; 2026 DefenseBudget Dash. Open data for public interest.
           </p>
         </div>
       </div>

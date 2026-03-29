@@ -10,5 +10,5 @@
   { "id": "M9", "title": "Visitor Counter", "status": "done", "milestone": 9 },
   { "id": "M10", "title": "SEO & Performance Optimization", "status": "done", "milestone": 10 },
   { "id": "M11", "title": "Vercel Deployment", "status": "done", "milestone": 11 },
-  { "id": "M12", "title": "Final QA & Polish", "status": "in-progress", "milestone": 12 }
+  { "id": "M12", "title": "Final QA & Polish", "status": "done", "milestone": 12 }
 ]

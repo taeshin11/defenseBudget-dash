@@ -1,3 +1,17 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy — DefenseBudget Dash",
+  description:
+    "Read the DefenseBudget Dash privacy policy to understand how we collect, use, and protect your information when you visit our website.",
+  openGraph: {
+    title: "Privacy Policy — DefenseBudget Dash",
+    description:
+      "How DefenseBudget Dash collects, uses, and protects your information.",
+    type: "website",
+  },
+};
+
 const LAST_UPDATED = "March 29, 2026";
 
 const SECTIONS = [

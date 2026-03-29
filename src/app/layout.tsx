@@ -8,8 +8,7 @@ import AdSlot from "@/components/AdSlot";
 import FeedbackWidget from "@/components/FeedbackWidget";
 import BackToTop from "@/components/BackToTop";
 
-// Replace G-XXXXXXXXXX with your actual Google Analytics 4 measurement ID
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -52,14 +51,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "DefenseBudget Dash",
-    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "DefenseBudget Dash" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "DefenseBudget Dash — Compare Global Military Spending by Country",
     description:
       "Compare defense spending, GDP ratios, and military personnel across 40+ nations.",
-    images: ["/og-image.svg"],
   },
   icons: {
     icon: "/favicon.svg",
@@ -89,19 +86,23 @@ export default function RootLayout({
         />
       </head>
 
-      {/* Google Analytics 4 */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}');
-        `}
-      </Script>
+      {/* Google Analytics 4 — only loads when measurement ID is configured */}
+      {GA_MEASUREMENT_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `}
+          </Script>
+        </>
+      )}
 
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
         <script

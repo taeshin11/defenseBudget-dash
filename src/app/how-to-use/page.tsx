@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "How to Use DefenseBudget Dash — Guide & FAQ",
+  description:
+    "Step-by-step guide to using DefenseBudget Dash: compare military budgets, explore rankings, and understand global defense spending data. Plus answers to frequently asked questions.",
+  openGraph: {
+    title: "How to Use DefenseBudget Dash — Guide & FAQ",
+    description:
+      "Learn how to compare defense budgets, explore rankings, and share your analysis with our step-by-step guide.",
+    type: "website",
+  },
+};
 
 const STEPS = [
   {
@@ -163,9 +176,26 @@ const FAQS = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function HowToUsePage() {
   return (
     <div className="space-y-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <header>
         <h1 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary">
           How to Use DefenseBudget Dash

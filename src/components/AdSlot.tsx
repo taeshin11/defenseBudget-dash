@@ -97,6 +97,15 @@ export default function AdSlot({ position }: AdSlotProps) {
         <>
           {/* === BANNER: 728x90 desktop + 320x50 mobile === */}
           {position === "banner" && (
+            <p className="text-center text-[10px] text-text-muted mb-1">Advertisement</p>
+          )}
+          {position === "sidebar" && (
+            <p className="text-center text-[10px] text-text-muted mb-1">Advertisement</p>
+          )}
+          {position === "in-content" && (
+            <p className="text-center text-[10px] text-text-muted mb-1">Advertisement</p>
+          )}
+          {position === "banner" && (
             <>
               <div className="mx-auto hidden sm:block w-[728px]">
                 <Adsterra728x90 id="ad-banner-desktop" />

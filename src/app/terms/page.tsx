@@ -1,3 +1,17 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service — DefenseBudget Dash",
+  description:
+    "Terms of Service for DefenseBudget Dash. Read the terms governing your use of our defense spending comparison tool.",
+  openGraph: {
+    title: "Terms of Service — DefenseBudget Dash",
+    description:
+      "Terms governing your use of DefenseBudget Dash.",
+    type: "website",
+  },
+};
+
 const LAST_UPDATED = "March 29, 2026";
 
 const SECTIONS = [

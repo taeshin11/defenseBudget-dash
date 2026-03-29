@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About DefenseBudget Dash — Data Sources & Methodology",
+  description:
+    "Learn about DefenseBudget Dash, our data sources from SIPRI and the World Bank, our methodology, and how we make global defense spending data accessible and transparent.",
+  openGraph: {
+    title: "About DefenseBudget Dash — Data Sources & Methodology",
+    description:
+      "Learn about our mission, data sources, methodology, and how DefenseBudget Dash makes defense spending transparent.",
+    type: "website",
+  },
+};
 
 const SECTIONS = [
   {

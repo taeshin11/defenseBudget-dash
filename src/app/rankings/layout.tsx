@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Defense Spending Rankings — DefenseBudget Dash",
+  title: "World Defense Spending Rankings 2024 — DefenseBudget Dash",
   description:
     "Full sortable rankings of global defense spending, GDP ratios, and active military personnel across 40+ nations.",
   openGraph: {
-    title: "Defense Spending Rankings — DefenseBudget Dash",
+    title: "World Defense Spending Rankings 2024 — DefenseBudget Dash",
     description:
       "Full sortable rankings of global defense spending, GDP ratios, and active military personnel.",
   },
