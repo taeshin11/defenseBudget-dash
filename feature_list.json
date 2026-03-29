@@ -1,0 +1,14 @@
+[
+  { "id": "M1", "title": "Project Scaffolding & Repo Setup", "status": "in-progress", "milestone": 1 },
+  { "id": "M2", "title": "Data Layer (JSON + helpers)", "status": "pending", "milestone": 2 },
+  { "id": "M3", "title": "Core UI Layout & Navigation", "status": "pending", "milestone": 3 },
+  { "id": "M4", "title": "Home / Landing Page", "status": "pending", "milestone": 4 },
+  { "id": "M5", "title": "Compare Tool (Core Feature)", "status": "pending", "milestone": 5 },
+  { "id": "M6", "title": "Rankings Page", "status": "pending", "milestone": 6 },
+  { "id": "M7", "title": "Google Sheets Webhook Integration", "status": "pending", "milestone": 7 },
+  { "id": "M8", "title": "Adsterra Ad Integration", "status": "pending", "milestone": 8 },
+  { "id": "M9", "title": "Visitor Counter", "status": "pending", "milestone": 9 },
+  { "id": "M10", "title": "SEO & Performance Optimization", "status": "pending", "milestone": 10 },
+  { "id": "M11", "title": "Vercel Deployment", "status": "pending", "milestone": 11 },
+  { "id": "M12", "title": "Final QA & Polish", "status": "pending", "milestone": 12 }
+]

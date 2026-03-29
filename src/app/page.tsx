@@ -1,65 +1,224 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  getTotalGlobalSpending,
+  getHighestSpender,
+  getHighestPctGDP,
+  getTopN,
+} from "@/lib/data";
+import AdSlot from "@/components/AdSlot";
+import Top10Chart from "./page.client";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+export const metadata: Metadata = {
+  title: "DefenseBudget Dash — Compare Global Military Spending by Country",
+  description:
+    "Explore and compare defense budgets, GDP ratios, and military personnel across 40+ nations with interactive charts, rankings, and data tools.",
+  openGraph: {
+    title: "DefenseBudget Dash — Compare Global Military Spending by Country",
+    description:
+      "Explore and compare defense budgets, GDP ratios, and military personnel across 40+ nations.",
+    type: "website",
+  },
+};
+
+const STEPS = [
+  {
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+      </svg>
+    ),
+    title: "Select",
+    description: "Choose up to 8 countries you want to compare side by side.",
+  },
+  {
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 13h4v8H3zM10 9h4v12h-4zM17 5h4v16h-4z"
+        />
+      </svg>
+    ),
+    title: "Compare",
+    description:
+      "View interactive bar charts across spending, GDP %, and personnel metrics.",
+  },
+  {
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"
+        />
+      </svg>
+    ),
+    title: "Explore",
+    description:
+      "Dive into full rankings, sort by any column, and share your findings.",
+  },
+];
+
+export default function HomePage() {
+  const totalSpending = getTotalGlobalSpending();
+  const highestSpender = getHighestSpender();
+  const highestPctGDP = getHighestPctGDP();
+  const top10 = getTopN(10, "spending");
+
+  const chartData = top10.map((c) => ({
+    name: c.name,
+    flag: c.flag,
+    value: c.defense_spending_billion_usd,
+    code: c.code,
+  }));
+
+  return (
+    <div className="space-y-12">
+      {/* Hero Section */}
+      <section className="text-center py-12 sm:py-16">
+        <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+          How Much Does Your Country
+          <br className="hidden sm:block" /> Spend on Defense?
+        </h1>
+        <p className="mt-4 mx-auto max-w-2xl text-lg text-text-secondary">
+          Explore and compare military budgets across 40+ nations. See where
+          taxpayer money goes, who spends the most, and how your country stacks
+          up.
+        </p>
+        <Link
+          href="/compare"
+          className="mt-8 inline-flex items-center gap-2 rounded-xl bg-accent-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-accent-navy/90 hover:shadow-lg"
+        >
+          Start Comparing
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"
+            />
+          </svg>
+        </Link>
+      </section>
+
+      {/* Quick Stats Strip */}
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="rounded-xl bg-white p-6 shadow-md text-center transition-shadow duration-300 hover:shadow-lg">
+          <p className="text-xs font-medium uppercase tracking-wider text-text-secondary">
+            Total Global Spending
+          </p>
+          <p className="mt-2 font-heading text-2xl font-bold text-accent-navy">
+            ${totalSpending.toFixed(1)}B
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="rounded-xl bg-white p-6 shadow-md text-center transition-shadow duration-300 hover:shadow-lg">
+          <p className="text-xs font-medium uppercase tracking-wider text-text-secondary">
+            Highest Spender
+          </p>
+          <p className="mt-2 font-heading text-2xl font-bold text-accent-navy">
+            {highestSpender ? `${highestSpender.flag} ${highestSpender.name}` : "—"}
+          </p>
+          {highestSpender && (
+            <p className="mt-1 text-sm text-text-secondary">
+              ${highestSpender.defense_spending_billion_usd.toFixed(1)}B
+            </p>
+          )}
         </div>
-      </main>
+        <div className="rounded-xl bg-white p-6 shadow-md text-center transition-shadow duration-300 hover:shadow-lg">
+          <p className="text-xs font-medium uppercase tracking-wider text-text-secondary">
+            Highest % of GDP
+          </p>
+          <p className="mt-2 font-heading text-2xl font-bold text-accent-navy">
+            {highestPctGDP ? `${highestPctGDP.flag} ${highestPctGDP.name}` : "—"}
+          </p>
+          {highestPctGDP && (
+            <p className="mt-1 text-sm text-text-secondary">
+              {highestPctGDP.defense_pct_gdp.toFixed(1)}% of GDP
+            </p>
+          )}
+        </div>
+      </section>
+
+      <AdSlot position="banner" />
+
+      {/* Top 10 Preview */}
+      <section>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-heading text-2xl font-bold text-text-primary">
+            Top 10 Defense Spenders
+          </h2>
+          <Link
+            href="/rankings"
+            className="text-sm font-medium text-accent-navy hover:underline transition-colors duration-300"
+          >
+            View Full Rankings &rarr;
+          </Link>
+        </div>
+        <div className="rounded-xl bg-white p-6 shadow-md">
+          <Top10Chart data={chartData} />
+        </div>
+      </section>
+
+      <AdSlot position="in-content" />
+
+      {/* How It Works */}
+      <section className="text-center">
+        <h2 className="font-heading text-2xl font-bold text-text-primary mb-8">
+          How It Works
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {STEPS.map((step, i) => (
+            <div
+              key={step.title}
+              className="rounded-xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg"
+            >
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-accent-navy-light text-accent-navy">
+                {step.icon}
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1">
+                Step {i + 1}
+              </p>
+              <h3 className="font-heading text-lg font-bold text-text-primary mb-2">
+                {step.title}
+              </h3>
+              <p className="text-sm text-text-secondary">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

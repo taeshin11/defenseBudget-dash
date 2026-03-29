@@ -1,0 +1,16 @@
+# DefenseBudget Dash — Progress Log
+# Last Updated: 2026-03-29
+# Current Milestone: 1 (Project Scaffolding & Repo Setup)
+# Status: IN PROGRESS
+
+## Completed
+(none)
+
+## Current
+Milestone 1: Project Scaffolding & Repo Setup
+
+## Blockers
+(none)
+
+## Live URL
+(not deployed yet)
