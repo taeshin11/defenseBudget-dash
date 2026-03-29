@@ -24,9 +24,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://defense-budget-dash.vercel.app"),
   title: "DefenseBudget Dash — Compare Global Military Spending by Country",
   description:
     "Compare defense spending, GDP ratios, and military personnel across 40+ nations with interactive charts and rankings.",
+  keywords: [
+    "defense spending",
+    "military budget",
+    "GDP ratio",
+    "military personnel",
+    "defense comparison",
+    "SIPRI data",
+    "world bank military",
+    "defense budget by country",
+    "military spending rankings",
+  ],
   openGraph: {
     title: "DefenseBudget Dash — Compare Global Military Spending by Country",
     description:
