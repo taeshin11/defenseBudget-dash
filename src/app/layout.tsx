@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
+
+// Replace G-XXXXXXXXXX with your actual Google Analytics 4 measurement ID
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -66,6 +70,21 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+
+      {/* Google Analytics 4 */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
+
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
         <script
           type="application/ld+json"

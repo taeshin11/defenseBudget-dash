@@ -194,6 +194,75 @@ export default function HomePage() {
 
       <AdSlot position="in-content" />
 
+      {/* Understanding Global Defense Spending */}
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-text-primary mb-4">
+          Understanding Global Defense Spending
+        </h2>
+        <div className="rounded-xl bg-white p-6 shadow-md space-y-4">
+          <p className="text-text-secondary leading-relaxed">
+            Global defense spending surpassed $2 trillion annually, reflecting
+            the growing complexity of modern security challenges. From
+            conventional military forces to cyber defense and space operations,
+            nations allocate significant portions of their national budgets to
+            safeguard sovereignty and project power. Understanding these
+            expenditures is essential for policymakers, researchers, journalists,
+            and engaged citizens who want to follow how public funds are used.
+          </p>
+          <p className="text-text-secondary leading-relaxed">
+            Defense budgets vary dramatically by region and economic capacity.
+            The United States alone accounts for roughly 40% of worldwide
+            military spending, while NATO allies collectively aim to meet the
+            alliance&apos;s 2% of GDP guideline. Meanwhile, countries in the
+            Indo-Pacific, the Middle East, and Eastern Europe are increasing
+            outlays in response to shifting geopolitical dynamics, territorial
+            disputes, and emerging threats.
+          </p>
+          <p className="text-text-secondary leading-relaxed">
+            DefenseBudget Dash aggregates data from trusted sources including
+            SIPRI and the World Bank so you can compare absolute spending
+            figures, GDP ratios, and active military personnel across more than
+            40 countries in one place. Whether you are writing a research paper,
+            preparing a policy brief, or simply curious about how your country
+            stacks up, our interactive tools make it easy to explore the numbers.
+          </p>
+        </div>
+      </section>
+
+      {/* Why Defense Budget Transparency Matters */}
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-text-primary mb-4">
+          Why Defense Budget Transparency Matters
+        </h2>
+        <div className="rounded-xl bg-white p-6 shadow-md space-y-4">
+          <p className="text-text-secondary leading-relaxed">
+            Transparent defense budgets strengthen democratic accountability.
+            When citizens can see how much their government spends on the
+            military and compare that figure to health, education, and
+            infrastructure investments, they can make more informed decisions at
+            the ballot box. Open data also reduces the risk of corruption and
+            waste within defense procurement pipelines.
+          </p>
+          <p className="text-text-secondary leading-relaxed">
+            For international relations, transparency serves as a
+            confidence-building measure. Countries that publish detailed defense
+            expenditures signal predictability to allies and adversaries alike,
+            lowering the likelihood of miscalculation. Organizations like SIPRI,
+            NATO, and the United Nations encourage member states to report
+            military spending openly as part of broader arms-control and
+            peacebuilding efforts.
+          </p>
+          <p className="text-text-secondary leading-relaxed">
+            Tools like DefenseBudget Dash democratize access to this critical
+            information. Instead of sifting through dense government reports and
+            spreadsheets, users can visualize trends, rank countries by multiple
+            metrics, and share their findings with colleagues or on social media
+            in seconds. Our goal is to make defense spending data accessible,
+            understandable, and actionable for everyone.
+          </p>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="text-center">
         <h2 className="font-heading text-2xl font-bold text-text-primary mb-8">
