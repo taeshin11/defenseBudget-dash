@@ -104,6 +104,11 @@ export default function RankingsPage() {
     });
   }, [filtered, sortKey, sortDir]);
 
+  const maxSpending = useMemo(
+    () => Math.max(...allCountries.map((c) => c.defense_spending_billion_usd), 1),
+    [allCountries],
+  );
+
   return (
     <div className="space-y-6">
       <header>
@@ -141,6 +146,17 @@ export default function RankingsPage() {
         />
       </div>
 
+      {/* Stats Bar */}
+      <div className="rounded-xl bg-white shadow-md px-6 py-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+        <span className="font-semibold text-text-primary">
+          {filtered.length} {filtered.length === 1 ? "Country" : "Countries"}
+        </span>
+        <span className="text-text-muted">&middot;</span>
+        <span className="text-text-secondary">
+          ${filtered.reduce((sum, c) => sum + c.defense_spending_billion_usd, 0).toFixed(1)}B Total
+        </span>
+      </div>
+
       {/* Table */}
       <div className="rounded-xl bg-white shadow-md overflow-hidden">
         <div className="overflow-x-auto">
@@ -172,28 +188,52 @@ export default function RankingsPage() {
                     i % 2 === 0 ? "bg-white" : "bg-bg-primary/30"
                   }`}
                 >
-                  {COLUMNS.map((col) => (
-                    <td
-                      key={col.key}
-                      className={`whitespace-nowrap px-4 py-3 ${col.align} ${
-                        col.key === "name"
-                          ? "sticky left-0 z-10 font-medium text-text-primary " +
-                            (i % 2 === 0 ? "bg-white" : "bg-[#f8f9fc]")
-                          : "text-text-secondary"
-                      }`}
-                    >
-                      {col.key === "name" ? (
-                        <Link
-                          href={`/country/${country.code.toLowerCase()}`}
-                          className="hover:text-accent-navy hover:underline transition-colors duration-200"
-                        >
-                          {col.format(country)}
-                        </Link>
-                      ) : (
-                        col.format(country)
-                      )}
-                    </td>
-                  ))}
+                  {COLUMNS.map((col) => {
+                    // Color-code % of GDP
+                    const gdpColorClass =
+                      col.key === "defense_pct_gdp"
+                        ? country.defense_pct_gdp > 5
+                          ? "text-accent-red font-semibold"
+                          : country.defense_pct_gdp > 3
+                            ? "text-[#F59E0B] font-semibold"
+                            : "text-text-secondary"
+                        : "";
+
+                    return (
+                      <td
+                        key={col.key}
+                        className={`whitespace-nowrap px-4 py-3 ${col.align} ${
+                          col.key === "name"
+                            ? "sticky left-0 z-10 font-medium text-text-primary " +
+                              (i % 2 === 0 ? "bg-white" : "bg-[#f8f9fc]")
+                            : col.key === "defense_pct_gdp"
+                              ? gdpColorClass
+                              : "text-text-secondary"
+                        }`}
+                      >
+                        {col.key === "name" ? (
+                          <Link
+                            href={`/country/${country.code.toLowerCase()}`}
+                            className="hover:text-accent-navy hover:underline transition-colors duration-200"
+                          >
+                            {col.format(country)}
+                          </Link>
+                        ) : col.key === "defense_spending_billion_usd" ? (
+                          <div className="relative flex items-center justify-end gap-2">
+                            <div
+                              className="absolute inset-y-0 left-0 rounded-sm bg-accent-navy/10"
+                              style={{
+                                width: `${(country.defense_spending_billion_usd / maxSpending) * 100}%`,
+                              }}
+                            />
+                            <span className="relative">{col.format(country)}</span>
+                          </div>
+                        ) : (
+                          col.format(country)
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
               {sorted.length === 0 && (

@@ -254,8 +254,8 @@ function ComparePageInner() {
           </div>
         </div>
 
-        {/* Chart */}
-        {chartData.length > 0 && (
+        {/* Chart or Empty State */}
+        {chartData.length > 0 ? (
           <div className="rounded-xl bg-white p-6 shadow-md">
             <h2 className="font-heading text-lg font-semibold text-text-primary mb-4">
               {metricLabel(metric)}
@@ -265,6 +265,71 @@ function ComparePageInner() {
               metric={metricLabel(metric)}
               valueFormatter={valueFormatter(metric)}
             />
+          </div>
+        ) : (
+          <div className="rounded-xl bg-white p-12 shadow-md text-center">
+            {/* Bar chart outline icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="mx-auto h-20 w-20 text-text-muted/40"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 13h4v8H3zM10 9h4v12h-4zM17 5h4v16h-4z"
+              />
+            </svg>
+            <p className="mt-4 text-lg font-medium text-text-secondary">
+              Select countries above to start comparing
+            </p>
+            <p className="mt-2 text-sm text-text-muted">
+              Or try one of these popular comparisons:
+            </p>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  const codes = ["US", "CN", "RU", "IN", "SA"];
+                  setSelected(codes);
+                  const matched = compareCountries(codes);
+                  setChartData(toChartData(matched, metric));
+                  router.replace(`/compare?countries=${codes.join(",")}&metric=${metric}`, { scroll: false });
+                }}
+                className="rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm transition-all duration-200 hover:border-accent-navy hover:text-accent-navy hover:shadow-md"
+              >
+                Top 5 Spenders
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const codes = ["US", "GB", "FR", "DE", "CN", "RU", "IN", "BR", "ZA"];
+                  setSelected(codes);
+                  const matched = compareCountries(codes);
+                  setChartData(toChartData(matched, metric));
+                  router.replace(`/compare?countries=${codes.join(",")}&metric=${metric}`, { scroll: false });
+                }}
+                className="rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm transition-all duration-200 hover:border-accent-navy hover:text-accent-navy hover:shadow-md"
+              >
+                NATO vs BRICS
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const codes = ["US", "GB", "FR", "DE", "JP", "CA", "IT"];
+                  setSelected(codes);
+                  const matched = compareCountries(codes);
+                  setChartData(toChartData(matched, metric));
+                  router.replace(`/compare?countries=${codes.join(",")}&metric=${metric}`, { scroll: false });
+                }}
+                className="rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm transition-all duration-200 hover:border-accent-navy hover:text-accent-navy hover:shadow-md"
+              >
+                G7 Countries
+              </button>
+            </div>
           </div>
         )}
       </div>
