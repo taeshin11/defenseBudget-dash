@@ -390,6 +390,51 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Explore More Insights */}
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-text-primary mb-6">
+          Explore Defense Spending Insights
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Link
+            href="/nato-defense-spending"
+            className="group rounded-xl bg-white p-5 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+          >
+            <h3 className="font-heading font-bold text-text-primary group-hover:text-accent-navy transition-colors">
+              NATO Defense Spending
+            </h3>
+            <p className="text-sm text-text-secondary mt-1">Which NATO allies meet the 2% GDP target?</p>
+          </Link>
+          <Link
+            href="/us-vs-china-military-spending"
+            className="group rounded-xl bg-white p-5 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+          >
+            <h3 className="font-heading font-bold text-text-primary group-hover:text-accent-navy transition-colors">
+              US vs China
+            </h3>
+            <p className="text-sm text-text-secondary mt-1">The world&apos;s two largest defense budgets compared</p>
+          </Link>
+          <Link
+            href="/top-military-spenders"
+            className="group rounded-xl bg-white p-5 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+          >
+            <h3 className="font-heading font-bold text-text-primary group-hover:text-accent-navy transition-colors">
+              Top 15 Spenders
+            </h3>
+            <p className="text-sm text-text-secondary mt-1">Countries with the biggest defense budgets</p>
+          </Link>
+          <Link
+            href="/defense-spending-by-region"
+            className="group rounded-xl bg-white p-5 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+          >
+            <h3 className="font-heading font-bold text-text-primary group-hover:text-accent-navy transition-colors">
+              By Region
+            </h3>
+            <p className="text-sm text-text-secondary mt-1">Military spending breakdown across continents</p>
+          </Link>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="text-center">
         <h2 className="font-heading text-2xl font-bold text-text-primary mb-8">

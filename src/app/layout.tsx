@@ -78,6 +78,12 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://www.highperformanceformat.com" />
         {/* Google AdSense - must be in <head> for verification */}
         <script
           async
@@ -105,6 +111,7 @@ export default function RootLayout({
       )}
 
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
+        {/* WebApplication + Dataset structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -112,6 +119,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               name: "DefenseBudget Dash",
+              url: "https://defense-budget-dash.vercel.app",
               description:
                 "Compare defense spending, GDP ratios, and military personnel across 40+ nations.",
               applicationCategory: "ReferenceApplication",
@@ -127,6 +135,47 @@ export default function RootLayout({
                   "@type": "Organization",
                   name: "SIPRI / World Bank",
                 },
+              },
+            }),
+          }}
+        />
+        {/* Organization structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "DefenseBudget Dash",
+              url: "https://defense-budget-dash.vercel.app",
+              logo: "https://defense-budget-dash.vercel.app/favicon.svg",
+              description:
+                "Free interactive tool for comparing global defense spending, military budgets, and armed forces across countries.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "taeshinkim11@gmail.com",
+                contactType: "customer support",
+              },
+            }),
+          }}
+        />
+        {/* WebSite with SearchAction for Google Sitelinks Search Box */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "DefenseBudget Dash",
+              url: "https://defense-budget-dash.vercel.app",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://defense-budget-dash.vercel.app/rankings?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
               },
             }),
           }}
