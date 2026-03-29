@@ -80,14 +80,14 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-
-      {/* Google AdSense */}
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7098271335538021"
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
+      <head>
+        {/* Google AdSense - must be in <head> for verification */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7098271335538021"
+          crossOrigin="anonymous"
+        />
+      </head>
 
       {/* Google Analytics 4 */}
       <Script
