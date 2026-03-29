@@ -52,12 +52,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "DefenseBudget Dash",
+    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "DefenseBudget Dash" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "DefenseBudget Dash — Compare Global Military Spending by Country",
     description:
       "Compare defense spending, GDP ratios, and military personnel across 40+ nations.",
+    images: ["/og-image.svg"],
+  },
+  icons: {
+    icon: "/favicon.svg",
   },
   robots: { index: true, follow: true },
   verification: {

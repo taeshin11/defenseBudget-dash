@@ -114,6 +114,22 @@ export default function HomePage() {
         />
         {/* Gradient mesh overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(ellipse_at_top_left,rgba(30,58,138,0.15)_0%,transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(30,58,138,0.10)_0%,transparent_50%)]" />
+        {/* Subtle globe illustration */}
+        <svg
+          className="absolute right-[-60px] top-1/2 -translate-y-1/2 h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] opacity-[0.06] pointer-events-none"
+          viewBox="0 0 200 200"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1.5" />
+          <ellipse cx="100" cy="100" rx="45" ry="90" stroke="currentColor" strokeWidth="1" />
+          <ellipse cx="100" cy="100" rx="70" ry="90" stroke="currentColor" strokeWidth="0.8" />
+          <path d="M10 100h180" stroke="currentColor" strokeWidth="1" />
+          <path d="M20 60h160" stroke="currentColor" strokeWidth="0.8" />
+          <path d="M20 140h160" stroke="currentColor" strokeWidth="0.8" />
+          <path d="M40 35h120" stroke="currentColor" strokeWidth="0.5" />
+          <path d="M40 165h120" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
         <div className="relative z-10">
           <p className="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold text-accent-navy tracking-tight">
             $2.2&nbsp;Trillion
