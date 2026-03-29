@@ -1,51 +1,81 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 
 interface AdSlotProps {
   position: "banner" | "sidebar" | "in-content" | "sticky-footer";
 }
 
-const POSITION_STYLES: Record<
-  AdSlotProps["position"],
-  { wrapper: string; label: string }
-> = {
-  banner: {
-    wrapper:
-      "mx-auto hidden h-[90px] w-[728px] items-center justify-center sm:flex",
-    label: "728 x 90",
-  },
-  sidebar: {
-    wrapper: "mx-auto flex h-[250px] w-[300px] items-center justify-center",
-    label: "300 x 250",
-  },
-  "in-content": {
-    wrapper: "flex h-[250px] w-full items-center justify-center",
-    label: "Responsive",
-  },
-  "sticky-footer": {
-    wrapper:
-      "fixed inset-x-0 bottom-0 z-40 flex h-[50px] items-center justify-center bg-white shadow-[0_-2px_8px_rgba(0,0,0,0.1)]",
-    label: "320 x 50",
-  },
-};
+// Adsterra 320x50
+function Adsterra320x50({ id }: { id: string }) {
+  return (
+    <div id={id}>
+      <Script
+        id={`adsterra-opt-${id}`}
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `atOptions = { 'key': 'b817cb8842c10842f297632148242251', 'format': 'iframe', 'height': 50, 'width': 320, 'params': {} };`,
+        }}
+      />
+      <Script
+        id={`adsterra-inv-${id}`}
+        strategy="lazyOnload"
+        src="https://www.highperformanceformat.com/b817cb8842c10842f297632148242251/invoke.js"
+      />
+    </div>
+  );
+}
 
-/* Mobile-specific banner fallback (shown only on small screens) */
-const MOBILE_BANNER_WRAPPER =
-  "mx-auto flex h-[50px] w-[320px] items-center justify-center sm:hidden";
+// Adsterra 728x90
+function Adsterra728x90({ id }: { id: string }) {
+  return (
+    <div id={id}>
+      <Script
+        id={`adsterra-opt-${id}`}
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `atOptions = { 'key': 'e91d87e5d6768aaf04cf1e6c8a791e58', 'format': 'iframe', 'height': 90, 'width': 728, 'params': {} };`,
+        }}
+      />
+      <Script
+        id={`adsterra-inv-${id}`}
+        strategy="lazyOnload"
+        src="https://www.highperformanceformat.com/e91d87e5d6768aaf04cf1e6c8a791e58/invoke.js"
+      />
+    </div>
+  );
+}
+
+// Adsterra 300x250
+function Adsterra300x250({ id }: { id: string }) {
+  return (
+    <div id={id}>
+      <Script
+        id={`adsterra-opt-${id}`}
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `atOptions = { 'key': '03944a7a942e7b1228bb1a5b72a9e321', 'format': 'iframe', 'height': 250, 'width': 300, 'params': {} };`,
+        }}
+      />
+      <Script
+        id={`adsterra-inv-${id}`}
+        strategy="lazyOnload"
+        src="https://www.highperformanceformat.com/03944a7a942e7b1228bb1a5b72a9e321/invoke.js"
+      />
+    </div>
+  );
+}
 
 export default function AdSlot({ position }: AdSlotProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(position === "sticky-footer");
   const [dismissed, setDismissed] = useState(false);
 
-  /* Lazy-load non-sticky ads via IntersectionObserver */
   useEffect(() => {
     if (position === "sticky-footer") return;
-
     const el = containerRef.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -55,34 +85,50 @@ export default function AdSlot({ position }: AdSlotProps) {
       },
       { rootMargin: "200px" },
     );
-
     observer.observe(el);
     return () => observer.disconnect();
   }, [position]);
 
   if (position === "sticky-footer" && dismissed) return null;
 
-  const { wrapper, label } = POSITION_STYLES[position];
-
   return (
     <div ref={containerRef} aria-hidden="true">
-      {visible ? (
+      {visible && (
         <>
-          {/* Desktop banner */}
-          <div
-            className={`${wrapper} rounded-[var(--radius-sm)] border border-dashed border-border bg-bg-secondary`}
-          >
-            {/* ADSTERRA_BANNER_ID: replace_with_your_key */}
-            {/* GOOGLE_ADSENSE_SLOT: replace_with_your_ad_client_and_slot */}
-            <span className="text-xs text-text-muted">
-              Advertisement &middot; {label}
-            </span>
+          {/* === BANNER: 728x90 desktop + 320x50 mobile === */}
+          {position === "banner" && (
+            <>
+              <div className="mx-auto hidden sm:block w-[728px]">
+                <Adsterra728x90 id="ad-banner-desktop" />
+              </div>
+              <div className="mx-auto block sm:hidden w-[320px]">
+                <Adsterra320x50 id="ad-banner-mobile" />
+              </div>
+            </>
+          )}
 
-            {position === "sticky-footer" && (
+          {/* === SIDEBAR: 300x250 === */}
+          {position === "sidebar" && (
+            <div className="mx-auto w-[300px]">
+              <Adsterra300x250 id="ad-sidebar" />
+            </div>
+          )}
+
+          {/* === IN-CONTENT: 300x250 centered === */}
+          {position === "in-content" && (
+            <div className="mx-auto w-[300px]">
+              <Adsterra300x250 id="ad-in-content" />
+            </div>
+          )}
+
+          {/* === STICKY FOOTER: 320x50 === */}
+          {position === "sticky-footer" && (
+            <div className="fixed inset-x-0 bottom-0 z-40 flex h-[60px] items-center justify-center bg-white shadow-[0_-2px_8px_rgba(0,0,0,0.1)]">
+              <Adsterra320x50 id="ad-sticky-footer" />
               <button
                 type="button"
                 onClick={() => setDismissed(true)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-text-muted hover:bg-bg-secondary hover:text-text-primary"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white p-1.5 text-text-muted shadow-sm hover:text-text-primary"
                 aria-label="Dismiss ad"
               >
                 <svg
@@ -98,31 +144,9 @@ export default function AdSlot({ position }: AdSlotProps) {
                   />
                 </svg>
               </button>
-            )}
-          </div>
-
-          {/* Mobile banner fallback (only for "banner" position) */}
-          {position === "banner" && (
-            <div
-              className={`${MOBILE_BANNER_WRAPPER} rounded-[var(--radius-sm)] border border-dashed border-border bg-bg-secondary`}
-            >
-              {/* ADSTERRA_BANNER_ID: replace_with_your_key */}
-              {/* GOOGLE_ADSENSE_SLOT: replace_with_your_ad_client_and_slot */}
-              <span className="text-xs text-text-muted">
-                Advertisement &middot; 320 x 50
-              </span>
             </div>
           )}
-
-          <p className="mt-1 text-center text-[10px] text-text-muted">
-            Advertisement
-          </p>
         </>
-      ) : (
-        /* Placeholder while waiting for intersection */
-        <div
-          className={`${wrapper} rounded-[var(--radius-sm)] border border-dashed border-border bg-bg-secondary opacity-0`}
-        />
       )}
     </div>
   );
