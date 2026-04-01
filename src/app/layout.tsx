@@ -2,11 +2,6 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import AdSlot from "@/components/AdSlot";
-import FeedbackWidget from "@/components/FeedbackWidget";
-import BackToTop from "@/components/BackToTop";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
@@ -62,6 +57,23 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
   },
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://defense-budget-dash.vercel.app",
+    languages: {
+      "en": "https://defense-budget-dash.vercel.app",
+      "ko": "https://defense-budget-dash.vercel.app/ko",
+      "zh": "https://defense-budget-dash.vercel.app/zh",
+      "ja": "https://defense-budget-dash.vercel.app/ja",
+      "es": "https://defense-budget-dash.vercel.app/es",
+      "fr": "https://defense-budget-dash.vercel.app/fr",
+      "de": "https://defense-budget-dash.vercel.app/de",
+      "ar": "https://defense-budget-dash.vercel.app/ar",
+      "pt": "https://defense-budget-dash.vercel.app/pt",
+      "ru": "https://defense-budget-dash.vercel.app/ru",
+      "hi": "https://defense-budget-dash.vercel.app/hi",
+      "x-default": "https://defense-budget-dash.vercel.app",
+    },
+  },
   verification: {
     google: "WddgcbVJsL2BGHNAje5m6DK56IcR0Mw5UOqozI2Xtrc",
   },
@@ -78,13 +90,13 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
-        {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://www.highperformanceformat.com" />
-        {/* Google AdSense - must be in <head> for verification */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#3B5998" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7098271335538021"
@@ -92,7 +104,6 @@ export default function RootLayout({
         />
       </head>
 
-      {/* Google Analytics 4 — only loads when measurement ID is configured */}
       {GA_MEASUREMENT_ID && (
         <>
           <Script
@@ -139,7 +150,6 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* Organization structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -159,7 +169,6 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* WebSite with SearchAction for Google Sitelinks Search Box */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -180,14 +189,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <Header />
-        <main className="flex-1 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {children}
-        </main>
-        <Footer />
-        <BackToTop />
-        <FeedbackWidget />
-        <AdSlot position="sticky-footer" />
+        {children}
       </body>
     </html>
   );
