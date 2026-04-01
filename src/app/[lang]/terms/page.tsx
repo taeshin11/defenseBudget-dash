@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "March 29, 2026";
+const LAST_UPDATED = "March 29, 2025";
 
 const SECTIONS = [
   {
